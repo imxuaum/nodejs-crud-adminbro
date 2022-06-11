@@ -15,8 +15,8 @@ const Project = mongoose.model("Project", ProjectSchema)
 
 //Admin Bro
 const AdminBro = require('admin-bro')
-const AdminBroExpress = require('@admin-bro/express')
-const AdminBroMongoose = require('@admin-bro/mongoose')
+const AdminBroExpress = require('admin-bro-expressjs')
+const AdminBroMongoose = require('admin-bro-mongoose')
 
 // use mongoose in AdminBro
 AdminBro.registerAdapter(AdminBroMongoose)
@@ -33,14 +33,14 @@ const router = AdminBroExpress.buildRouter(adminBroOptions)
 const express = require('express')
 const server = express()
 
-server 
-    .use(adminBroOptions.options.rootPath, router)
+server
+.use(adminBroOptions.options.rootPath, router)
 
 // Run App
 const run = async () => {
-    await mongoose.connect("mongodb://localhost/adminbroapp", {
+    await mongoose.connect('mongodb://localhost:27017/adminbroapp', {
         useNewUrlParser: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
     })
 
     await server.listen(5500, () => console.log("Server started"))
